@@ -1,6 +1,6 @@
 {
   "name": "efflux",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Yet another simple Promises/A+ compliant async flow control using ES6 generators.",
   "main": "dist/efflux.min.js",
   "directories": {
