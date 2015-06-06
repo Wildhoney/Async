@@ -4,16 +4,12 @@
 
     /**
      * @module Efflux
+     * @param {Function} generatorFn
      * @author Adam Timberlake
      * @link https://github.com/Wildhoney/Efflux
      */
-    export default class Efflux {
+    export default function efflux(generatorFn) {
 
-    }
-
-    // Register the global variable if the `window` object is available.
-    if ($window.Efflux) {
-        $window.Efflux = Efflux;
-    }
+    };
 
 })(window);
