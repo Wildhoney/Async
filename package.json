@@ -7,7 +7,7 @@
     "example": "example"
   },
   "scripts": {
-    "test": "jest"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -35,16 +35,5 @@
     "gulp-jest": "^0.4.0",
     "jasmine": "^2.3.1",
     "jest-cli": "^0.4.5"
-  },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "testFileExtensions": [
-      "js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json"
-    ],
-    "testDirectoryName": "tests"
   }
 }

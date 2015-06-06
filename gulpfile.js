@@ -4,7 +4,7 @@
 
     var jest = require('gulp-jest');
 
-    gulp.task('jest', function () {
+    gulp.task('jest', function() {
 
         return gulp.src('tests').pipe(jest({
             scriptPreprocessor: '../node_modules/babel-jest',
