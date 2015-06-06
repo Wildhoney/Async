@@ -7,7 +7,7 @@
 ```javascript
 const getModels = () => {
 
-    return new Efflux(function*() {
+    return efflux(function*() {
 
         const users  = yield getUsers(),
               places = yield getPlaces(users);
