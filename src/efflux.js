@@ -1,4 +1,4 @@
-(function main($window) {
+const efflux = (function main($window) {
 
     "use strict";
 
@@ -8,8 +8,12 @@
      * @author Adam Timberlake
      * @link https://github.com/Wildhoney/Efflux
      */
-    export default function efflux(generatorFn) {
+    return function efflux(generatorFn) {
+
+
 
     };
 
 })(window);
+
+export default efflux;
