@@ -10,7 +10,7 @@ const efflux = (function main($window) {
      */
     return function efflux(generatorFn) {
 
-
+        return new Promise((resolve, reject) => {});
 
     };
 

@@ -2,19 +2,21 @@
 
     "use strict";
 
-    var jest = require('gulp-jest');
+    var karma = require('gulp-karma');
 
-    gulp.task('jest', function() {
+    gulp.task('karma', function() {
 
-        return gulp.src('tests').pipe(jest({
-            scriptPreprocessor: '../node_modules/babel-jest',
-            testDirectoryName: 'tests',
-            testPathIgnorePatterns: ['node_modules'],
-            moduleFileExtensions: ['js']
-        }));
+        return gulp.src(['tests/*.test.js', 'src/efflux.js'])
+            .pipe(karma({
+                configFile: 'karma.conf.js',
+                action: 'run'
+            }))
+            .on('error', function(error) {
+                throw error;
+            });
 
     });
 
-    gulp.task('default', ['jest']);
+    gulp.task('default', ['karma']);
 
 })(require('gulp'));
