@@ -15,7 +15,7 @@ const getUsers = function getUsers(names) {
 
 };
 
-describe('Efflux', () => {
+describe('Async', () => {
 
     it('Should be able to import the module;', () => {
         expect(typeof Async).toBe('function');

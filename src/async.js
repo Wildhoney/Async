@@ -7,8 +7,13 @@ export default (function main($window) {
 
     "use strict";
 
+    const defaultGenerator = function*() {
+        yield false;
+    };
+
     /**
      * @method throwException
+     * @param {String} message
      * @return {Error}
      */
     function throwException(message) {
@@ -29,7 +34,7 @@ export default (function main($window) {
      * @param {Function} [fn=function*() {}]
      * @return {Function}
      */
-    return function Async(fn = function*() {}) {
+    return function Async(fn = defaultGenerator) {
 
         return new $window.Promise((resolve, reject) => {
 
