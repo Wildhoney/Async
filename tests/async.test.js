@@ -57,4 +57,17 @@ describe('Efflux', () => {
 
     });
 
+    it('Should be able to reject the entire promise when an error is thrown;', function(done) {
+
+        const async = new Async(function*() {
+            return yield new Promise((resolve, reject) => reject(new Error('Unable to continue')));
+        });
+
+        async.then(() => {}, (error) => {
+            expect(error.message).toEqual('Unable to continue');
+            done();
+        });
+
+    });
+
 });

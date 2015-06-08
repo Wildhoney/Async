@@ -38,7 +38,7 @@ export default (function main($window) {
 
                 iteration.value.then((value) => {
                     consumePromise(generator.next(value));
-                });
+                }, (error) => reject(error));
 
             })(generator.next());
 
