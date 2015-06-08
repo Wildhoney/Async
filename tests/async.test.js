@@ -1,5 +1,5 @@
 import babel from 'babel-core/polyfill';
-import Async from'../src/efflux.js';
+import Async from'../src/async.js';
 
 const getUsers = function getUsers(names) {
 
@@ -18,8 +18,8 @@ const getUsers = function getUsers(names) {
 describe('Efflux', () => {
 
     it('Should be able to import the module;', () => {
-        expect(typeof new Async()).toBe('function');
-        expect(new Async().name).toEqual('efflux');
+        expect(typeof Async).toBe('function');
+        expect(Async.name).toEqual('Async');
     });
 
     it('Should be able to accept a generator function;', () => {

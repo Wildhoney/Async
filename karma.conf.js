@@ -5,7 +5,7 @@ module.exports = function(config) {
         frameworks: ['jasmine', 'browserify'],
         files: [
             'tests/*.test.js',
-            'src/efflux.js'
+            'src/async.js'
         ],
         reporters: ['dots'],
         port: 9876,
@@ -15,7 +15,7 @@ module.exports = function(config) {
         browsers: ['Chrome'],
         singleRun: false,
         preprocessors: {
-            'src/efflux.js': ['browserify'],
+            'src/async.js': ['browserify'],
             'tests/*.test.js': ['browserify']
         },
         browserify: {

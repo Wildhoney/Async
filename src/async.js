@@ -9,32 +9,28 @@ export default (function main($window) {
 
     /**
      * @constructor
-     * @param {Function} generatorFn
+     * @param {Function} fn
      * @return {Function}
      */
-    return (generatorFn) => {
+    return function Async(fn) {
 
-        return function Async() {
+        return new $window.Promise((resolve, reject) => {
 
-            return new $window.Promise((resolve, reject) => {
+            const generator = fn();
 
-                const generator = generatorFn();
+            (function consumePromise(iteration) {
 
-                (function consumePromise(iteration) {
+                if (iteration.done) {
+                    return void resolve(iteration.value);
+                }
 
-                    if (iteration.done) {
-                        return void resolve(iteration.value);
-                    }
+                iteration.value.then((value) => {
+                    consumePromise(generator.next(value));
+                });
 
-                    iteration.value.then((value) => {
-                        consumePromise(generator.next(value));
-                    });
+            })(generator.next());
 
-                })(generator.next());
-
-            });
-
-        };
+        });
 
     };
 

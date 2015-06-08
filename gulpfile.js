@@ -6,7 +6,7 @@
 
     gulp.task('karma', function() {
 
-        return gulp.src(['tests/*.test.js', 'src/efflux.js'])
+        return gulp.src(['tests/*.test.js', 'src/async.js'])
             .pipe(karma({
                 configFile: 'karma.conf.js',
                 action: 'run'
