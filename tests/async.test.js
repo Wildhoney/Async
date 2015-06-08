@@ -27,6 +27,17 @@ describe('Efflux', () => {
         expect(new Async(generatorFn) instanceof Promise).toBeTruthy();
     });
 
+    it('Should be able to reject the promise when non-generator function is passed;', function() {
+
+        const async = new Async(() => {});
+
+        async.then(() => {}, (exception) => {
+            expect(exception.message).toEqual('Async: Non-generator function passed.');
+            done();
+        });
+
+    });
+
     it('Should be able to get users from the generator function;', function(done) {
 
         const async = new Async(function*() {

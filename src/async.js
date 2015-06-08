@@ -8,6 +8,14 @@ export default (function main($window) {
     "use strict";
 
     /**
+     * @method throwException
+     * @return {Error}
+     */
+    function throwException(message) {
+        return new Error(`Async: ${message}.`);
+    }
+
+    /**
      * @constructor
      * @param {Function} fn
      * @return {Function}
@@ -17,6 +25,10 @@ export default (function main($window) {
         return new $window.Promise((resolve, reject) => {
 
             const generator = fn();
+
+            if (!generator || !('next' in generator)) {
+                return void reject(throwException('Non-generator function passed'));
+            }
 
             (function consumePromise(iteration) {
 
