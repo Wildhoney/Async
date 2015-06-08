@@ -16,6 +16,15 @@ export default (function main($window) {
     }
 
     /**
+     * @method wrapError
+     * @param {String|Error} message
+     * @return {Error}
+     */
+    function wrapError(message) {
+        return message instanceof Error ? message : new Error(message);
+    }
+
+    /**
      * @constructor
      * @param {Function} [fn=function*() {}]
      * @return {Function}
@@ -34,17 +43,21 @@ export default (function main($window) {
                 return void reject(throwException('Non-generator function passed'));
             }
 
-            (function consumePromise(iteration) {
+            try {
 
-                if (iteration.done) {
-                    return void resolve(iteration.value);
-                }
+                (function consumePromise(iteration) {
 
-                iteration.value.then((value) => {
-                    consumePromise(generator.next(value));
-                }, (error) => reject(error));
+                    if (iteration.done) {
+                        return void resolve(iteration.value);
+                    }
 
-            })(generator.next());
+                    iteration.value.then((value) => {
+                        consumePromise(generator.next(value));
+                    }, (error) => reject(wrapError(error)));
+
+                })(generator.next());
+
+            } catch (error) { return void reject(wrapError(error)); }
 
         });
 

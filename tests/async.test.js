@@ -49,6 +49,19 @@ describe('Efflux', () => {
 
     });
 
+    it('Should be able to reject the promise when an exception is thrown;', function() {
+
+        const async = new Async(function*() {
+            throw new Error('What happened?!');
+        });
+
+        async.then(() => {}, (exception) => {
+            expect(exception.message).toEqual('What happened?!');
+            done();
+        });
+
+    });
+
     it('Should be able to get users from the generator function;', function(done) {
 
         const async = new Async(function*() {
@@ -62,6 +75,7 @@ describe('Efflux', () => {
             expect(users[1].name).toEqual('Maria');
             expect(users[0].location).toEqual('UK');
             expect(users[1].location).toEqual('UK');
+
             done();
 
         });
