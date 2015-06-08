@@ -24,6 +24,10 @@ export default (function main($window) {
 
         return new $window.Promise((resolve, reject) => {
 
+            if (typeof fn !== 'function') {
+                return void reject(throwException('Non-function passed as generator'));
+            }
+
             const generator = fn();
 
             if (!generator || !('next' in generator)) {

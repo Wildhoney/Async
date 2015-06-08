@@ -38,6 +38,17 @@ describe('Efflux', () => {
 
     });
 
+    it('Should be able to reject the promise when invalid param passed;', function() {
+
+        const async = new Async('Uh');
+
+        async.then(() => {}, (exception) => {
+            expect(exception.message).toEqual('Async: Non-function passed as generator.');
+            done();
+        });
+
+    });
+
     it('Should be able to get users from the generator function;', function(done) {
 
         const async = new Async(function*() {
