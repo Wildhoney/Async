@@ -51,6 +51,10 @@ export default (function main($window) {
                         return void resolve(iteration.value);
                     }
 
+                    if (!iteration.value || typeof iteration.value !== 'object' || !('then' in iteration.value)) {
+                        return void reject(throwException('Non-thenable value yielded by generator'));
+                    }
+
                     iteration.value.then((value) => {
                         consumePromise(generator.next(value));
                     }, (error) => reject(wrapError(error)));

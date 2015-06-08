@@ -62,6 +62,19 @@ describe('Efflux', () => {
 
     });
 
+    it('Should be able to reject the promise when non-promise is returned;', function() {
+
+        const async = new Async(function*() {
+            yield 'Non-promise value';
+        });
+
+        async.then(() => {}, (exception) => {
+            expect(exception.message).toEqual('Async: Non-thenable value yielded by generator.');
+            done();
+        });
+
+    });
+
     it('Should be able to get users from the generator function;', function(done) {
 
         const async = new Async(function*() {
