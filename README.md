@@ -13,20 +13,12 @@
 ## Example
 
 ```javascript
-const getModels = () => {
+new Async(function*() {
 
-    return new Async(function*() {
+    const users  = yield getUsers(),
+          places = yield getPlaces(users);
 
-        const users  = yield getUsers(),
-              places = yield getPlaces(users);
+    return { users, places };
 
-        return { users, places };
-
-    });
-
-};
-
-getModels().then((models) => {
-    console.log(models);
-});
+}).then((models) => console.log(models));
 ```
