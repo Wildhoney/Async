@@ -17,10 +17,10 @@ export default (function main($window) {
 
     /**
      * @constructor
-     * @param {Function} fn
+     * @param {Function} [fn=function*() {}]
      * @return {Function}
      */
-    return function Async(fn) {
+    return function Async(fn = function*() {}) {
 
         return new $window.Promise((resolve, reject) => {
 
