@@ -5,7 +5,7 @@ const getUsers = function getUsers(names) {
 
     const timeoutMilliseconds = Math.random() * 1000;
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
 
         resolve(names.map((name) => {
             return { name: name, location: 'UK' };

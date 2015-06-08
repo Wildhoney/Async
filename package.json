@@ -41,7 +41,7 @@
     "jshint-stylish": "^2.0.0",
     "karma": "^0.12.36",
     "karma-browserify": "^4.2.1",
-    "karma-chrome-launcher": "^0.1.12",
+    "karma-firefox-launcher": "^0.1.6",
     "karma-jasmine": "^0.3.5"
   }
 }
