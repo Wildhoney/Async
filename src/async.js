@@ -52,7 +52,7 @@ export default (function main($window) {
                     }
 
                     if (!iteration.value || typeof iteration.value !== 'object' || !('then' in iteration.value)) {
-                        return void reject(throwException('Non-thenable value yielded by generator'));
+                        return void generator.throw(throwException('Non-thenable value yielded by generator'));
                     }
 
                     iteration.value.then((value) => {
