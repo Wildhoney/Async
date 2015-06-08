@@ -1,12 +1,12 @@
-# Efflux
+# Async
 
 > Yet another simple Promises/A+ compliant async flow control using ES6 generators.
 
-![Travis](http://img.shields.io/travis/Wildhoney/Efflux.svg?style=flat-square)
+![Travis](http://img.shields.io/travis/Wildhoney/Async.svg?style=flat-square)
 &nbsp;
-![Bower](https://img.shields.io/bower/v/efflux.svg?style=flat-square)
+![Bower](https://img.shields.io/bower/v/lib-async.svg?style=flat-square)
 &nbsp;
-![npm](http://img.shields.io/npm/v/efflux.svg?style=flat-square)
+![npm](http://img.shields.io/npm/v/lib-async.svg?style=flat-square)
 &nbsp;
 ![License MIT](http://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat-square)
 
@@ -15,7 +15,7 @@
 ```javascript
 const getModels = () => {
 
-    return efflux(function*() {
+    return new Async(function*() {
 
         const users  = yield getUsers(),
               places = yield getPlaces(users);
