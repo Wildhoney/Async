@@ -31,7 +31,7 @@ export default (function main($window) {
 
     /**
      * @constructor
-     * @param {Function} [fn=function*() {}]
+     * @param {Function} [fn=defaultGenerator]
      * @return {Function}
      */
     return function Async(fn = defaultGenerator) {
