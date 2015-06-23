@@ -32,7 +32,7 @@ describe('Async', () => {
         const async = new Async(() => {});
 
         async.then(() => {}, (exception) => {
-            expect(exception.message).toEqual('Async: Non-generator function passed.');
+            expect(exception.message).toEqual('Async: Non-generator function passed;');
             done();
         });
 
@@ -43,7 +43,7 @@ describe('Async', () => {
         const async = new Async('Uh');
 
         async.then(() => {}, (exception) => {
-            expect(exception.message).toEqual('Async: Non-function passed as generator.');
+            expect(exception.message).toEqual('Async: Non-function passed as generator;');
             done();
         });
 
@@ -69,7 +69,7 @@ describe('Async', () => {
         });
 
         async.then(() => {}, (exception) => {
-            expect(exception.message).toEqual('Async: Non-thenable value yielded by generator.');
+            expect(exception.message).toEqual('Async: Non-thenable value yielded by generator;');
             done();
         });
 
