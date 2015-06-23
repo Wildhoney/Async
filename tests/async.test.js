@@ -27,29 +27,29 @@ describe('Async', () => {
         expect(new Async(generatorFn) instanceof Promise).toBeTruthy();
     });
 
-    it('Should be able to reject the promise when non-generator function is passed;', function() {
+    it('Should be able to reject the promise when non-generator function is passed;', function(done) {
 
         const async = new Async(() => {});
 
         async.then(() => {}, (exception) => {
-            expect(exception.message).toEqual('Async: Non-generator function passed;');
+            expect(exception.message).toEqual('Async: Non-generator function passed.');
             done();
         });
 
     });
 
-    it('Should be able to reject the promise when invalid param passed;', function() {
+    it('Should be able to reject the promise when invalid param passed;', function(done) {
 
         const async = new Async('Uh');
 
         async.then(() => {}, (exception) => {
-            expect(exception.message).toEqual('Async: Non-function passed as generator;');
+            expect(exception.message).toEqual('Async: Non-function passed as generator.');
             done();
         });
 
     });
 
-    it('Should be able to reject the promise when an exception is thrown;', function() {
+    it('Should be able to reject the promise when an exception is thrown;', function(done) {
 
         const async = new Async(function*() {
             throw new Error('What happened?!');
@@ -57,19 +57,6 @@ describe('Async', () => {
 
         async.then(() => {}, (exception) => {
             expect(exception.message).toEqual('What happened?!');
-            done();
-        });
-
-    });
-
-    it('Should be able to reject the promise when non-promise is returned;', function() {
-
-        const async = new Async(function*() {
-            yield 'Non-promise value';
-        });
-
-        async.then(() => {}, (exception) => {
-            expect(exception.message).toEqual('Async: Non-thenable value yielded by generator;');
             done();
         });
 
