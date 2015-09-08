@@ -1,5 +1,5 @@
 import babel from 'babel-core/polyfill';
-import Async from'../src/async.js';
+import Async, {EXPECTING_GENERATOR} from'../src/async.js';
 
 /**
  * @method emptyFunction
@@ -22,7 +22,7 @@ describe('Async', () => {
     it('Should be able to reject the promise when non-generator function is passed;', done => {
 
         new Async(emptyFunction).then(emptyFunction, exception => {
-            expect(exception.message).toEqual('Async: You must pass in a generator to the constructor.');
+            expect(exception.message).toEqual(`Async: ${EXPECTING_GENERATOR}.`);
             done();
         });
 
@@ -31,7 +31,7 @@ describe('Async', () => {
     it('Should be able to reject the promise when invalid param passed;', done => {
 
         new Async('Invalid!').then(emptyFunction, exception => {
-            expect(exception.message).toEqual('Async: You must pass in a generator to the constructor.');
+            expect(exception.message).toEqual(`Async: ${EXPECTING_GENERATOR}.`);
             done();
         });
 

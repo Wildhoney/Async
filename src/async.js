@@ -1,10 +1,20 @@
 /**
+ * @constant EXPECTING_GENERATOR
+ * @type {String}
+ */
+export const EXPECTING_GENERATOR = 'You must pass in a generator to the constructor';
+
+/**
  * @module Async
  * @author Adam Timberlake
  * @link https://github.com/Wildhoney/Async
  */
 export default class Async {
 
+    /**
+     * @property DEFAULT_GENERATOR
+     * @type {Function}
+     */
     static DEFAULT_GENERATOR = function*() {};
 
     /**
@@ -19,9 +29,9 @@ export default class Async {
             const assert = this.assert(reject);
 
             // Assert that we have a function that is a generate before we start it.
-            assert(this.isFunction(generator), 'You must pass in a generator to the constructor');
+            assert(this.isFunction(generator), EXPECTING_GENERATOR);
             const iterator = generator();
-            assert(this.isGenerator(iterator), 'You must pass in a generator to the constructor');
+            assert(this.isGenerator(iterator), EXPECTING_GENERATOR);
 
             try {
 
