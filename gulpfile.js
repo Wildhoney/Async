@@ -5,6 +5,7 @@
     var karma      = require('gulp-karma'),
         uglify     = require('gulp-uglify'),
         jshint     = require('gulp-jshint'),
+        eslint     = require('gulp-eslint'),
         rename     = require('gulp-rename'),
         fs         = require('fs'),
         browserify = require('browserify'),
@@ -13,7 +14,7 @@
     var compile = function(destPath, entryFile) {
 
         return browserify({ debug: true })
-            .transform(babelify)
+            .transform(babelify, { stage: 0 })
             .require(entryFile, { entry: true })
             .bundle()
             .on('error', function (model) { console.error(['Error:', model.message].join(' ')); })
@@ -37,8 +38,9 @@
     gulp.task('lint', function() {
 
         return gulp.src('src/async.js')
-            .pipe(jshint())
-            .pipe(jshint.reporter(require('jshint-stylish')));
+                   .pipe(eslint())
+                   .pipe(eslint.format())
+                   .pipe(eslint.failOnError());
 
     });
 

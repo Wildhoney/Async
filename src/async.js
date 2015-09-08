@@ -15,7 +15,7 @@ export default class Async {
      * @property DEFAULT_GENERATOR
      * @type {Function}
      */
-    static DEFAULT_GENERATOR = function*() {};
+    static DEFAULT_GENERATOR = function* defaultGenerator() {};
 
     /**
      * @constructor
@@ -103,70 +103,3 @@ export default class Async {
     }
 
 }
-
-//export default (function main($window) {
-//
-//    "use strict";
-//
-//    const defaultGenerator = function*() {
-//        yield false;
-//    };
-//
-//    /**
-//     * @method throwException
-//     * @param {String} message
-//     * @return {Error}
-//     */
-//    function throwException(message) {
-//        return new Error(`Async: ${message}.`);
-//    }
-//
-//    /**
-//     * @method wrapError
-//     * @param {String|Error} message
-//     * @return {Error}
-//     */
-//    function wrapError(message) {
-//        return message instanceof Error ? message : new Error(message);
-//    }
-//
-//    /**
-//     * @constructor
-//     * @param {Function} [fn=defaultGenerator]
-//     * @return {Function}
-//     */
-//    return function Async(fn = defaultGenerator) {
-//
-//        return new $window.Promise((resolve, reject) => {
-//
-//            if (typeof fn !== 'function') {
-//                return void reject(throwException('Non-function passed as generator'));
-//            }
-//
-//            const generator = fn();
-//
-//            if (!generator || !('next' in generator)) {
-//                return void reject(throwException('Non-generator function passed'));
-//            }
-//
-//            try {
-//
-//                (function consumePromise(iteration) {
-//
-//                    if (iteration.done) {
-//                        return void resolve(iteration.value);
-//                    }
-//
-//                    iteration.value = Promise.resolve(iteration.value);
-//                    iteration.value.then((value) => consumePromise(generator.next(value)),
-//                                         (error) => reject(wrapError(error)));
-//
-//                })(generator.next());
-//
-//            } catch (error) { return void reject(wrapError(error)); }
-//
-//        });
-//
-//    };
-//
-//})(window);
