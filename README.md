@@ -4,7 +4,7 @@
 
 ![Travis](http://img.shields.io/travis/Wildhoney/Async.svg?style=flat-square)
 &nbsp;
-![Bower](https://img.shields.io/bower/v/lib-async.svg?style=flat-square)
+![Bower](http://img.shields.io/bower/v/lib-async.svg?style=flat-square)
 &nbsp;
 ![npm](http://img.shields.io/npm/v/lib-async.svg?style=flat-square)
 &nbsp;
