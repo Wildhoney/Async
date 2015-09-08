@@ -15,7 +15,7 @@ describe('Async', () => {
     });
 
     it('Should be able to accept a generator function;', () => {
-        const mockGenerator = function*() {};
+        const mockGenerator = function* () {};
         expect(new Async(mockGenerator) instanceof Promise).toBeTruthy();
     });
 
@@ -43,7 +43,7 @@ describe('Async', () => {
             throw new Error('Throw!');
         };
 
-        new Async(function*() {
+        new Async(function* () {
 
             try {
                 yield getData();
@@ -73,7 +73,7 @@ describe('Async', () => {
 
         };
 
-        const mockGenerator = function*() {
+        const mockGenerator = function* () {
 
             const users = yield getUsers('Adam', 'Maria');
 
@@ -103,7 +103,7 @@ describe('Async', () => {
 
     it('Should be able to reject the entire promise when an error is thrown;', done => {
 
-        new Async(function*() {
+        new Async(function* () {
 
             return yield new Promise((resolve, reject) => {
                 reject(new Error('Unable to continue'));

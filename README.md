@@ -10,15 +10,16 @@
 &nbsp;
 ![License MIT](http://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat-square)
 
+ * **npm:** `npm i lib-async`
+
 ## Example
 
 ```javascript
-new Async(function*() {
+new Async(function* () {
 
-    const users  = yield getUsers(),
-          places = yield getPlaces(users);
-
+    const users  = yield getUsers();
+    const places = yield getPlaces(users);
     return { users, places };
 
-}).then((models) => console.log(models));
+}).then(models => console.log(models));
 ```
