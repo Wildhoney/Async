@@ -17,9 +17,18 @@
 ```javascript
 new Async(function* () {
 
-    const users  = yield getUsers();
-    const places = yield getPlaces(users);
-    return { users, places };
+    try {
+
+        const users  = yield getUsers();
+        const places = yield getPlaces(users);
+        return { users, places };
+        
+    } catch (error) {
+    
+        // Any errors in `getUsers` and/or `getPlaces` can be caught.
+        showError(error);
+    
+    }
 
 }).then(collections => {
 
