@@ -12,7 +12,7 @@
 
  * **npm:** `npm i lib-async`
 
-## Example
+## Getting Started
 
 ```javascript
 new Async(function* () {
