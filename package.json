@@ -2,7 +2,7 @@
   "name": "lib-async",
   "version": "0.2.0",
   "description": "Yet another simple Promises/A+ compliant async flow control using ES6 generators.",
-  "main": "dist/async.js",
+  "main": "src/async.js",
   "directories": {
     "example": "example"
   },
