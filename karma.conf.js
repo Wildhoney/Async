@@ -7,7 +7,7 @@ module.exports = function(config) {
             'tests/*.test.js',
             'src/async.js'
         ],
-        reporters: ['dots'],
+        reporters: ['spec'],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
