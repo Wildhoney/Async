@@ -1,6 +1,6 @@
 {
   "name": "lib-async",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Yet another simple Promises/A+ compliant async flow control using ES6 generators.",
   "main": "dist/efflux.min.js",
   "directories": {
