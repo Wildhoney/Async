@@ -4,7 +4,6 @@
 
     var karma      = require('gulp-karma'),
         uglify     = require('gulp-uglify'),
-        jshint     = require('gulp-jshint'),
         eslint     = require('gulp-eslint'),
         rename     = require('gulp-rename'),
         fs         = require('fs'),
