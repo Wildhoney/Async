@@ -1,19 +1,11 @@
 import babel from 'babel-core/polyfill';
 import Async from'../src/async.js';
 
-const getUsers = function getUsers(names) {
-
-    const timeoutMilliseconds = Math.random() * 1000;
-
-    return new Promise((resolve, reject) => {
-
-        resolve(names.map((name) => {
-            return { name: name, location: 'UK' };
-        }));
-
-    });
-
-};
+/**
+ * @method emptyFunction
+ * @return {void}
+ */
+const emptyFunction = () => {};
 
 describe('Async', () => {
 
@@ -23,52 +15,79 @@ describe('Async', () => {
     });
 
     it('Should be able to accept a generator function;', () => {
-        const generatorFn = function*() {};
-        expect(new Async(generatorFn) instanceof Promise).toBeTruthy();
+        const mockGenerator = function*() {};
+        expect(new Async(mockGenerator) instanceof Promise).toBeTruthy();
     });
 
-    it('Should be able to reject the promise when non-generator function is passed;', function(done) {
+    it('Should be able to reject the promise when non-generator function is passed;', done => {
 
-        const async = new Async(() => {});
-
-        async.then(() => {}, (exception) => {
-            expect(exception.message).toEqual('Async: Non-generator function passed.');
+        new Async(emptyFunction).then(emptyFunction, exception => {
+            expect(exception.message).toEqual('Async: You must pass in a generator to the constructor.');
             done();
         });
 
     });
 
-    it('Should be able to reject the promise when invalid param passed;', function(done) {
+    it('Should be able to reject the promise when invalid param passed;', done => {
 
-        const async = new Async('Uh');
-
-        async.then(() => {}, (exception) => {
-            expect(exception.message).toEqual('Async: Non-function passed as generator.');
+        new Async('Invalid!').then(emptyFunction, exception => {
+            expect(exception.message).toEqual('Async: You must pass in a generator to the constructor.');
             done();
         });
 
     });
 
-    it('Should be able to reject the promise when an exception is thrown;', function(done) {
+    it('Should be able to throw an error in the generator;', done => {
 
-        const async = new Async(function*() {
-            throw new Error('What happened?!');
-        });
+        const getData = () => {
+            throw new Error('Throw!');
+        };
 
-        async.then(() => {}, (exception) => {
-            expect(exception.message).toEqual('What happened?!');
-            done();
+        new Async(function*() {
+
+            try {
+                yield getData();
+            } catch (e) {
+                expect(e.message).toEqual('Throw!');
+                done();
+            }
+
         });
 
     });
 
-    it('Should be able to get users from the generator function;', function(done) {
+    it('Should be able to get users from the generator function;', done => {
 
-        const async = new Async(function*() {
-            return yield getUsers(['Adam', 'Maria']);
-        });
+        /**
+         * @method getUsers
+         * @param {Array} names
+         * @return {Promise}
+         */
+        const getUsers = (...names) => {
 
-        async.then((users) => {
+            return new Promise(resolve => {
+                resolve(names.map(name => {
+                    return { name: name, location: 'UK' };
+                }));
+            });
+
+        };
+
+        const mockGenerator = function*() {
+
+            const users = yield getUsers('Adam', 'Maria');
+
+            expect(users.length).toEqual(2);
+            expect(users[0].name).toEqual('Adam');
+            expect(users[1].name).toEqual('Maria');
+            expect(users[0].location).toEqual('UK');
+            expect(users[1].location).toEqual('UK');
+
+            return users;
+
+        };
+
+        new Async(mockGenerator).then(users => {
 
             expect(users.length).toEqual(2);
             expect(users[0].name).toEqual('Adam');
@@ -82,13 +101,15 @@ describe('Async', () => {
 
     });
 
-    it('Should be able to reject the entire promise when an error is thrown;', function(done) {
+    it('Should be able to reject the entire promise when an error is thrown;', done => {
 
-        const async = new Async(function*() {
-            return yield new Promise((resolve, reject) => reject(new Error('Unable to continue')));
-        });
+        new Async(function*() {
 
-        async.then(() => {}, (error) => {
+            return yield new Promise((resolve, reject) => {
+                reject(new Error('Unable to continue'));
+            });
+
+        }).then(emptyFunction, (error) => {
             expect(error.message).toEqual('Unable to continue');
             done();
         });
