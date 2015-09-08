@@ -21,5 +21,10 @@ new Async(function* () {
     const places = yield getPlaces(users);
     return { users, places };
 
-}).then(models => console.log(models));
+}).then(collections => {
+
+    // `collections` is now an object of users and places.
+    console.log(collections);
+
+);
 ```
